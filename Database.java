@@ -54,6 +54,25 @@ public class Database {
         }
     }
     
+    @Override
+    public String toString() {        
+        // If Database isn't empty, print out the records
+        String retVal = "";
+        if (counter > 0) {
+            retVal += recordPrettyPrint(records[0], true) + "\n";
+            for (int i = 1; i < records.length; i++) {
+                if (i < counter)
+                    retVal += recordPrettyPrint(records[i], false) + "\n";
+                else
+                    break;
+            }
+        } else {
+            retVal = "Error: Database is empty! Cannot print null records.";
+        }
+        
+        return retVal;
+    }
+    
     public void addRecord(String fn, String ln, short a, int i) {
         if (counter < records.length)
             records[counter++] = new Record(fn, ln, a, i);

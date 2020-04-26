@@ -19,12 +19,13 @@ public class Main {
     
     public static void main(String[] args) {
         
+        db = createTemplateDatabase();
+        //db.printDatabase();
+        //System.out.println(MESSAGE);
+        System.out.println("Template Database created!");
+        
         new GUI();
         
-        db = createTemplateDatabase();
-        db.printDatabase();
-        
-        System.out.println(MESSAGE);
         while (true) {
             try {
                 int command = Integer.parseInt(scan.nextLine().trim());
@@ -314,5 +315,7 @@ public class Main {
         
         return database;
     }
+    
+    public static String databaseToString() { return db.toString(); }
     
 }
