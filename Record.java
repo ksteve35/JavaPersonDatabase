@@ -7,8 +7,7 @@ as the database records for each person.
 
 class Record {
     
-    // Height is in feet and inches, weight is in pounds,
-    // married is set to false if a person is deceased
+    // Height is in feet and inches, weight is in pounds
     private String firstName, lastName;
     private char middleInitial;
     private short age, heightFeet, heightInches;

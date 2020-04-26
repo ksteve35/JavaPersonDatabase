@@ -8,7 +8,7 @@ database for the database records.
 public class Database {
     
     private Record[] records;
-    public final String categories = String.format("%-7s", "ID") + String.format("%-16s", "FIRST NAME")
+    private final String categories = String.format("%-7s", "ID") + String.format("%-16s", "FIRST NAME")
             + String.format("%-16s", "MIDDLE INITIAL") + String.format("%-16s", "LAST NAME")
             + String.format("%-5s", "AGE") + String.format("%-10s", "HEIGHT") + String.format("%-10s", "WEIGHT")
             + String.format("%-10s", "STATUS") + String.format("%-10s", "MARITAL") + "\n"
@@ -24,6 +24,7 @@ public class Database {
     }
     
     public int getCounter() { return counter; }
+    public String getCategories() { return categories; }
     
     private String recordPrettyPrint(Record r, boolean b) {
         // boolean b says whether or not to print the categories header
@@ -69,9 +70,9 @@ public class Database {
     
     public void addRecord(Record r) {
         if (counter < records.length)
-            records[counter++] = new Record(r.getFirstName(), r.getLastName(), r.getAge(), r.getID(),
-                    r.getMiddleInitial(), r.getHeightFeet(), r.getHeightInches(), r.getWeight(),
-                    r.getDeceased(), r.getMarried());
+            records[counter++] = new Record(new String(r.getFirstName()), new String(r.getLastName()),
+                    r.getAge(), r.getID(), r.getMiddleInitial(), r.getHeightFeet(), r.getHeightInches(),
+                    r.getWeight(), r.getDeceased(), r.getMarried());
         else
             System.out.println("Error: Database is full! Cannot create new records.");
     }

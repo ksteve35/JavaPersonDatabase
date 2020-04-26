@@ -12,8 +12,10 @@ import java.util.Scanner;
 public class Main {
     
     public static Scanner scan = new Scanner(System.in);
-    public static final String MESSAGE = "\nPlease press one of the following to issue out a command:\n\n[0] Print out the database\n[1] Add a record\n[2] Edit a record\n[3] Delete a record\n";
     public static Database db;
+    public static final String MESSAGE = "\nPlease press one of the following to"
+            + "issue out a command:\n\n[0] Print out the database\n[1] Add a record\n"
+            + "[2] Edit a record\n[3] Delete a record\n";
     
     public static void main(String[] args) {
         
@@ -77,7 +79,10 @@ public class Main {
         boolean breakOut = true;
         while (breakOut) {
             
-            System.out.println("Please type in which attribute you'd like to change:\n[1] First Name\n[2] Last Name\n[3] Age\n[4] Middle Initial\n[5] Height\n[6] Weight\n[7] Life Status\n[8] Marital Status\n[9] Finish and Add Record");
+            System.out.println("Please type in which attribute you'd like to change:\n"
+                    + "[1] First Name\n[2] Last Name\n[3] Age\n[4] Middle Initial\n"
+                    + "[5] Height\n[6] Weight\n[7] Life Status\n[8] Marital Status\n"
+                    + "[9] Finish and Add Record");
             
             try {
                 int choice = Integer.parseInt(scan.nextLine().trim());
@@ -130,6 +135,9 @@ public class Main {
                                 System.out.println("Please type what you'd like to change the age to:");
                                 s = scan.nextLine().trim();
                                 try {
+                                    // x's new value is never used, but if the line
+                                    // doesn't throw an exception, then we know s
+                                    // was successfully parsed as an integer
                                     x = Integer.parseInt(s);
                                     temp[2] = s;
                                     System.out.println("Age has been changed to " + temp[2] + ".");
@@ -170,6 +178,9 @@ public class Main {
                                 System.out.println("Please type what you'd like to change the height's feet to:");
                                 try {
                                     s = scan.nextLine().trim();
+                                    // x and y's new values are never used, but if the
+                                    // lines don't throw exceptions, then we know s and
+                                    // t were successfully parsed as integers
                                     x = Integer.parseInt(s);
                                     System.out.println("Please type what you'd like to change the height's inches to:");
                                     t = scan.nextLine().trim();
@@ -197,6 +208,9 @@ public class Main {
                                 System.out.println("Please type what you'd like to change the weight to:");
                                 s = scan.nextLine().trim();
                                 try {
+                                    // x's new value is never used, but if the line
+                                    // doesn't throw an exception, then we know s
+                                    // was successfully parsed as an integer
                                     x = Integer.parseInt(s);
                                     temp[6] = s;
                                     System.out.println("Weight has been changed to " + temp[6] + ".");
@@ -243,7 +257,7 @@ public class Main {
                         Record r = new Record(temp[0], temp[1], (short) Integer.parseInt(temp[2]), 100 + db.getCounter(),
                                 temp[3].charAt(0), (short) Integer.parseInt(temp[4]), (short) Integer.parseInt(temp[5]),
                                 Integer.parseInt(temp[6]), temp[7].equals("DECEASED"), temp[8].equals("MARRIED"));
-                        System.out.println("Record will be added with the following attributes:\n" + db.categories
+                        System.out.println("Record will be added with the following attributes:\n" + db.getCategories()
                                 + String.format("%-7s", r.getID()) + String.format("%-16s", r.getFirstName())
                                 + String.format("%-16s", r.getMiddleInitial()) + String.format("%-16s", r.getLastName())
                                 + String.format("%-5s", r.getAge()) + String.format("%-10s", r.getHeightFeet() + "\'" + r.getHeightInches() + "\"")
@@ -261,9 +275,10 @@ public class Main {
     }
     
     public static String changeStatus(String s, boolean b) {
+        // This method is used to change either the life or marital status of a record.
         String[] words;
         
-        // If b is false, this is changing life status, else changing marital status
+        // If b is true, this is changing marital status, else changing life status
         if (b)
             words = new String[] {"Marital", "marital", "SINGLE", "MARRIED"};
         else
@@ -281,17 +296,21 @@ public class Main {
     }
     
     public static Database createTemplateDatabase() {
-        Database db = new Database();
+        // Fills the database with some records for debugging purposes.
+        // Note: Method returns a brand new database and will overwrite
+        // existing one. It will not simply add these records to an existing
+        // database.
+        Database database = new Database();
         
-        db.addRecord(new Record("KYLE", "STEVENSON", (short) 23, 100 + db.getCounter(), 'W', (short) 5, (short) 9, 172, false, false));
-        db.addRecord(new Record("ANDREW", "MERVYN", (short) 23, 100 + db.getCounter(), 'D', (short) 5, (short) 3, 143, false, false));
-        db.addRecord(new Record("NICOLAS", "MYNARCIK", (short) 23, 100 + db.getCounter(), 'A', (short) 5, (short) 8, 191, false, false));
-        db.addRecord(new Record("ADRIAN", "WATT", (short) 29, 100 + db.getCounter(), 'A', (short) 6, (short) 3, 183, false, false));
-        db.addRecord(new Record("AMY", "METZGAR", (short) 27, 100 + db.getCounter(), 'P', (short) 5, (short) 4, 146, false, false));
-        db.addRecord(new Record("SON", "GOKU", (short) 47, 100 + db.getCounter(), 'R', (short) 6, (short) 1, 213, false, true));
-        db.addRecord(new Record("STAN", "LEE", (short) 95, 100 + db.getCounter(), 'M', (short) 5, (short) 6, 128, true, false));
+        database.addRecord(new Record("KYLE", "STEVENSON", (short) 23, 100 + database.getCounter(), 'W', (short) 5, (short) 9, 172, false, false));
+        database.addRecord(new Record("ANDREW", "MERVYN", (short) 23, 100 + database.getCounter(), 'D', (short) 5, (short) 3, 143, false, false));
+        database.addRecord(new Record("NICOLAS", "MYNARCIK", (short) 23, 100 + database.getCounter(), 'A', (short) 5, (short) 8, 191, false, false));
+        database.addRecord(new Record("ADRIAN", "WATT", (short) 29, 100 + database.getCounter(), 'A', (short) 6, (short) 3, 183, false, false));
+        database.addRecord(new Record("AMY", "METZGAR", (short) 27, 100 + database.getCounter(), 'P', (short) 5, (short) 4, 146, false, false));
+        database.addRecord(new Record("SON", "GOKU", (short) 47, 100 + database.getCounter(), 'R', (short) 6, (short) 1, 213, false, true));
+        database.addRecord(new Record("STAN", "LEE", (short) 95, 100 + database.getCounter(), 'M', (short) 5, (short) 6, 128, true, false));
         
-        return db;
+        return database;
     }
     
 }
