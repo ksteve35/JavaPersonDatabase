@@ -27,13 +27,15 @@ public class GUI implements ActionListener {
     private JLabel commandPrompt;
     private JButton[] buttons;
     private final String[] buttonLabels = { "Add a record", "Edit a record", "Delete a record",
-                                            "Print by ID Ascending", "Print by ID Descending", "Print by First Name Ascending"};
+                                            "Print by ID Ascending", "Print by ID Descending",
+                                            "Print by First Name Ascending", "Print by First Name Descending",
+                                            "Print by Last Name Ascending", "Print by Last Name Descending"};
     
     public GUI() {
         frame = new JFrame();
         containingPanel = new JPanel();
         buttonPanel = new JPanel();
-        buttons = new JButton[6];
+        buttons = new JButton[buttonLabels.length];
         commandPrompt = new JLabel("Please press one of the following to issue out a command:", SwingConstants.CENTER);
         
         // Create buttons and their ActionListeners
@@ -48,7 +50,7 @@ public class GUI implements ActionListener {
         //JTextField firstNameTextField = new JTextField(20);
         
         containingPanel.setLayout(new BorderLayout(0, 12));
-        buttonPanel.setLayout(new GridLayout(2, 3));
+        buttonPanel.setLayout(new GridLayout(buttons.length / 3, buttons.length / 3));
         containingPanel.add(commandPrompt, BorderLayout.NORTH);
         
         // Adds buttons to buttonPanel's GridLayout
@@ -84,6 +86,10 @@ public class GUI implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            String[] titles = { "Adding a Record", "Editing a Record", "Results - ID Ascending",
+                                "Results - ID Descending", "Results - First Name Ascending",
+                                "Results - First Name Descending", "Results - Last Name Ascending",
+                                "Results - Last Name Descending"};
             JFrame data = new JFrame();
             JPanel resultsPanel = new JPanel();
             JTextPane results = new JTextPane();
@@ -91,16 +97,53 @@ public class GUI implements ActionListener {
             results.setFont(font);
             
             switch (buttonID) {
-                case 3:
+                case 0:     // Adding a Record
+                    break;
+                case 1:     // Editing a Record
+                    break;
+                case 2:     // Deleting a Record
+                    break;
+                case 3:     // ID Ascending
                     results.setText(getResults());
                     resultsPanel.add(results);
                     data.add(resultsPanel);
-                    data.setTitle("Results - ID Ascending");
-                    data.setSize(920, 500);
-                    data.setResizable(false);
-                    data.setVisible(true);
+                    data.setTitle(titles[2]);
+                    break;
+                case 4:     // ID Descending
+                    results.setText(getResults());
+                    resultsPanel.add(results);
+                    data.add(resultsPanel);
+                    data.setTitle(titles[3]);
+                    break;
+                case 5:     // First Name Ascending
+                    results.setText(getResults());
+                    resultsPanel.add(results);
+                    data.add(resultsPanel);
+                    data.setTitle(titles[4]);
+                    break;
+                case 6:     // First Name Descending
+                    results.setText(getResults());
+                    resultsPanel.add(results);
+                    data.add(resultsPanel);
+                    data.setTitle(titles[5]);
+                    break;
+                case 7:     // Last Name Ascending
+                    results.setText(getResults());
+                    resultsPanel.add(results);
+                    data.add(resultsPanel);
+                    data.setTitle(titles[6]);
+                    break;
+                case 8:     // Last Name Descending
+                    results.setText(getResults());
+                    resultsPanel.add(results);
+                    data.add(resultsPanel);
+                    data.setTitle(titles[7]);
                     break;
             }
+            
+            data.setSize(920, 500);
+            data.setResizable(false);
+            data.setVisible(true);
         }
         
         public String getResults() {
