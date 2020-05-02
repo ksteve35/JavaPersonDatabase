@@ -1,17 +1,18 @@
 /*
-
 This class is for the graphical user interface
 which is the view part of this project according
 to MVC terminology.
-
  */
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -98,6 +99,9 @@ public class GUI implements ActionListener {
             
             switch (buttonID) {
                 case 0:     // Adding a Record
+                    resultsPanel = addRecord(resultsPanel);
+                    data.add(resultsPanel);
+                    data.setTitle(titles[0]);
                     break;
                 case 1:     // Editing a Record
                     break;
@@ -150,6 +154,53 @@ public class GUI implements ActionListener {
             String retVal = "";
             retVal += Main.databaseToString();
             return retVal;
+        }
+        
+        private JPanel addRecord(JPanel p) {
+            JTextField firstNameTextField, middleInitialTextField,
+                    lastNameTextField, ageTextField, heightFeetTextField,
+                    heightInchesTextField, weightTextField;
+            JCheckBox deceasedCheckBox, marriedCheckBox;
+            JLabel firstNameLabel, middleInitialLabel, lastNameLabel,
+                    ageLabel, heightLabel, weightLabel;
+
+            firstNameTextField = new JTextField(25);
+            middleInitialTextField = new JTextField(1);
+            lastNameTextField = new JTextField(25);
+            ageTextField = new JTextField(3);
+            heightFeetTextField = new JTextField(2);
+            heightInchesTextField = new JTextField(2);
+            weightTextField = new JTextField(3);
+            
+            deceasedCheckBox = new JCheckBox("Deceased");
+            marriedCheckBox = new JCheckBox("Married");
+            
+            firstNameLabel = new JLabel("First Name:");
+            middleInitialLabel = new JLabel("Middle Initial (optional):");
+            lastNameLabel = new JLabel("Last Name:");
+            ageLabel = new JLabel("Age:");
+            heightLabel = new JLabel("Height (optional):");
+            weightLabel = new JLabel("Weight (optional):");
+            
+            p.setLayout(new FlowLayout(FlowLayout.LEFT));
+            p.add(firstNameLabel);
+            p.add(firstNameTextField);
+            p.add(middleInitialLabel);
+            p.add(middleInitialTextField);
+            p.add(lastNameLabel);
+            p.add(lastNameTextField);
+            
+            p.add(ageLabel);
+            p.add(ageTextField);
+            p.add(heightLabel);
+            p.add(heightFeetTextField);
+            p.add(heightInchesTextField);
+            p.add(weightLabel);
+            p.add(weightTextField);
+            p.add(deceasedCheckBox);
+            p.add(marriedCheckBox);
+            
+            return p;
         }
     }
     
