@@ -5,18 +5,14 @@ to MVC terminology.
  */
 
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 
@@ -45,11 +41,6 @@ public class GUI implements ActionListener {
             buttons[i].addActionListener(new DetectListener(i));
         }
         
-        
-        
-        
-        //JTextField firstNameTextField = new JTextField(20);
-        
         containingPanel.setLayout(new BorderLayout(0, 12));
         buttonPanel.setLayout(new GridLayout(buttons.length / 3, buttons.length / 3));
         containingPanel.add(commandPrompt, BorderLayout.NORTH);
@@ -69,13 +60,6 @@ public class GUI implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {}
-    
-    
-    
-    
-    
-    
-    
     
     private class DetectListener implements ActionListener {
         
@@ -99,9 +83,10 @@ public class GUI implements ActionListener {
             
             switch (buttonID) {
                 case 0:     // Adding a Record
-                    resultsPanel = addRecord(resultsPanel);
-                    data.add(resultsPanel);
-                    data.setTitle(titles[0]);
+                    GUIAddRecord gar = new GUIAddRecord();
+                    gar.setTitle(titles[0]);
+                    gar.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    gar.setVisible(true);
                     break;
                 case 1:     // Editing a Record
                     break;
@@ -110,44 +95,34 @@ public class GUI implements ActionListener {
                 case 3:     // ID Ascending
                     results.setText(getResults());
                     resultsPanel.add(results);
-                    data.add(resultsPanel);
-                    data.setTitle(titles[2]);
+                    dataJFrameHelper(data, resultsPanel, titles[2]);
                     break;
                 case 4:     // ID Descending
                     results.setText(getResults());
                     resultsPanel.add(results);
-                    data.add(resultsPanel);
-                    data.setTitle(titles[3]);
+                    dataJFrameHelper(data, resultsPanel, titles[3]);
                     break;
                 case 5:     // First Name Ascending
                     results.setText(getResults());
                     resultsPanel.add(results);
-                    data.add(resultsPanel);
-                    data.setTitle(titles[4]);
+                    dataJFrameHelper(data, resultsPanel, titles[4]);
                     break;
                 case 6:     // First Name Descending
                     results.setText(getResults());
                     resultsPanel.add(results);
-                    data.add(resultsPanel);
-                    data.setTitle(titles[5]);
+                    dataJFrameHelper(data, resultsPanel, titles[5]);
                     break;
                 case 7:     // Last Name Ascending
                     results.setText(getResults());
                     resultsPanel.add(results);
-                    data.add(resultsPanel);
-                    data.setTitle(titles[6]);
+                    dataJFrameHelper(data, resultsPanel, titles[6]);
                     break;
                 case 8:     // Last Name Descending
                     results.setText(getResults());
                     resultsPanel.add(results);
-                    data.add(resultsPanel);
-                    data.setTitle(titles[7]);
+                    dataJFrameHelper(data, resultsPanel, titles[7]);
                     break;
             }
-            
-            data.setSize(920, 500);
-            data.setResizable(false);
-            data.setVisible(true);
         }
         
         public String getResults() {
@@ -156,54 +131,14 @@ public class GUI implements ActionListener {
             return retVal;
         }
         
-        private JPanel addRecord(JPanel p) {
-            JTextField firstNameTextField, middleInitialTextField,
-                    lastNameTextField, ageTextField, heightFeetTextField,
-                    heightInchesTextField, weightTextField;
-            JCheckBox deceasedCheckBox, marriedCheckBox;
-            JLabel firstNameLabel, middleInitialLabel, lastNameLabel,
-                    ageLabel, heightLabel, weightLabel;
-
-            firstNameTextField = new JTextField(25);
-            middleInitialTextField = new JTextField(1);
-            lastNameTextField = new JTextField(25);
-            ageTextField = new JTextField(3);
-            heightFeetTextField = new JTextField(2);
-            heightInchesTextField = new JTextField(2);
-            weightTextField = new JTextField(3);
-            
-            deceasedCheckBox = new JCheckBox("Deceased");
-            marriedCheckBox = new JCheckBox("Married");
-            
-            firstNameLabel = new JLabel("First Name:");
-            middleInitialLabel = new JLabel("Middle Initial (optional):");
-            lastNameLabel = new JLabel("Last Name:");
-            ageLabel = new JLabel("Age:");
-            heightLabel = new JLabel("Height (optional):");
-            weightLabel = new JLabel("Weight (optional):");
-            
-            p.setLayout(new FlowLayout(FlowLayout.LEFT));
-            p.add(firstNameLabel);
-            p.add(firstNameTextField);
-            p.add(middleInitialLabel);
-            p.add(middleInitialTextField);
-            p.add(lastNameLabel);
-            p.add(lastNameTextField);
-            
-            p.add(ageLabel);
-            p.add(ageTextField);
-            p.add(heightLabel);
-            p.add(heightFeetTextField);
-            p.add(heightInchesTextField);
-            p.add(weightLabel);
-            p.add(weightTextField);
-            p.add(deceasedCheckBox);
-            p.add(marriedCheckBox);
-            
-            return p;
+        public void dataJFrameHelper(JFrame data, JPanel resultsPanel, String title) {
+            data.add(resultsPanel);
+            data.setTitle(title);
+            data.setSize(920, 500);
+            data.setResizable(false);
+            data.setVisible(true);
         }
+        
     }
-    
-    
     
 }

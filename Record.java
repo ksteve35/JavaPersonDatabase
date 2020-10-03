@@ -7,11 +7,17 @@ as the database records for each person.
 
 class Record {
     
-    // Height is in feet and inches, weight is in pounds
+    /*
+    Height is in feet and inches, weight is in pounds,
+    and married variable is set to false if deceased
+    variable is true.
+    */
+    
     private String firstName, lastName;
     private char middleInitial;
     private short age, heightFeet, heightInches;
-    private int weight, ID;
+    private int weight;
+    private final int ID;
     private boolean deceased, married;
     
     public Record(String fn, String ln, short a, int i) {
@@ -19,7 +25,7 @@ class Record {
         lastName = new String(ln).toUpperCase();
         age = a;
         ID = i;
-        middleInitial = 'A';
+        middleInitial = '-';
     }
     
     public Record(String fn, String ln, short a, int i, char m, short hF, short hI, int w, boolean d, boolean ma) {
@@ -66,7 +72,6 @@ class Record {
     public void setHeightFeet(short s) { heightFeet = s; }
     public void setHeightInches(short s) { heightInches = s; }
     public void setWeight(int i) { weight = i; }
-    public void setID(int i) { ID = i; }
     public void setDeceased(boolean b) { deceased = b; }
     public void setMarried(boolean b) { married = b; }
     
