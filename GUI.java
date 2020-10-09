@@ -9,12 +9,15 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
+import javax.swing.UnsupportedLookAndFeelException;
 
 
 public class GUI implements ActionListener {
@@ -51,6 +54,19 @@ public class GUI implements ActionListener {
         }
         containingPanel.add(buttonPanel, BorderLayout.CENTER);
         frame.add(containingPanel);
+        
+        try {
+            javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("Java Database");
         frame.setSize(960, 540);
@@ -89,6 +105,10 @@ public class GUI implements ActionListener {
                     gar.setVisible(true);
                     break;
                 case 1:     // Editing a Record
+                    GUIEditRecord ger = new GUIEditRecord();
+                    ger.setTitle(titles[1]);
+                    ger.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    ger.setVisible(true);
                     break;
                 case 2:     // Deleting a Record
                     break;

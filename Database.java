@@ -23,6 +23,7 @@ public class Database {
         records = new Record[size];
     }
     
+    public Record getRecord(int i) { return records[i]; }
     public int getCounter() { return counter; }
     public String getCategories() { return categories; }
     
@@ -98,6 +99,12 @@ public class Database {
                     r.getWeight(), r.getDeceased(), r.getMarried());
         else
             System.out.println("Error: Database is full! Cannot create new records.");
+    }
+    
+    public void editRecord(Record r, int i) {
+        records[i] = new Record(new String(r.getFirstName()), new String(r.getLastName()),
+            r.getAge(), r.getID(), r.getMiddleInitial(), r.getHeightFeet(), r.getHeightInches(),
+            r.getWeight(), r.getDeceased(), r.getMarried());
     }
     
 }

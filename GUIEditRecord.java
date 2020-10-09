@@ -1,4 +1,5 @@
 
+import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -12,13 +13,35 @@ import javax.swing.JOptionPane;
  *
  * @author Kyle
  */
-public class GUIAddRecord extends javax.swing.JFrame {
+public class GUIEditRecord extends javax.swing.JFrame {
 
     /**
      * Creates new form GUIAddRecord
      */
-    public GUIAddRecord() {
+    public GUIEditRecord() {
         initComponents();
+        AgeLabel.setVisible(false);
+        AgeTextField.setVisible(false);
+        DeceasedCheckBox.setVisible(false);
+        FirstNameLabel.setVisible(false);
+        FirstNameTextField.setVisible(false);
+        HeightFeetLabel.setVisible(false);
+        HeightFeetTextField.setVisible(false);
+        HeightInchesLabel.setVisible(false);
+        HeightInchesTextField.setVisible(false);
+        HeightLabel.setVisible(false);
+        LastNameLabel.setVisible(false);
+        LastNameTextField.setVisible(false);
+        MaritalCheckBox.setVisible(false);
+        MiddleInitialLabel.setVisible(false);
+        MiddleInitialTextField.setVisible(false);
+        OptionalFieldsLabel.setVisible(false);
+        RequiredFieldsLabel.setText("ID # of Record to Edit:");
+        StatusLabel.setVisible(false);
+        SubmissionButton.setVisible(false);
+        WeightLabel.setVisible(false);
+        WeightPoundsLabel.setVisible(false);
+        WeightTextField.setVisible(false);
     }
 
     /**
@@ -54,6 +77,8 @@ public class GUIAddRecord extends javax.swing.JFrame {
         HeightInchesLabel = new javax.swing.JLabel();
         WeightPoundsLabel = new javax.swing.JLabel();
         StatusLabel = new javax.swing.JLabel();
+        SearchTextField = new javax.swing.JTextField();
+        SearchButton = new javax.swing.JButton();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -72,7 +97,7 @@ public class GUIAddRecord extends javax.swing.JFrame {
         FirstNameLabel.setText("First Name:");
 
         TitleOfPageLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        TitleOfPageLabel.setText("Adding A Record");
+        TitleOfPageLabel.setText("Editing Record");
         TitleOfPageLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         FirstNameTextField.setColumns(25);
@@ -148,7 +173,7 @@ public class GUIAddRecord extends javax.swing.JFrame {
             }
         });
 
-        SubmissionButton.setText("Submit New Record");
+        SubmissionButton.setText("Submit Edited Record");
         SubmissionButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SubmissionButtonActionPerformed(evt);
@@ -169,39 +194,52 @@ public class GUIAddRecord extends javax.swing.JFrame {
 
         StatusLabel.setText("Status:");
 
+        SearchTextField.setColumns(3);
+        SearchTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchTextFieldActionPerformed(evt);
+            }
+        });
+
+        SearchButton.setText("Search");
+        SearchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(TitleOfPageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(SubmissionButton)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(SubmissionButton)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(RequiredFieldsLabel)
-                                .addGap(225, 225, 225)
-                                .addComponent(OptionalFieldsLabel))
+                                .addComponent(FirstNameLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(FirstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(FirstNameLabel)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(FirstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(LastNameLabel)
-                                            .addComponent(AgeLabel))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(AgeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(LastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(56, 56, 56)
+                                    .addComponent(LastNameLabel)
+                                    .addComponent(AgeLabel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(AgeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(LastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(RequiredFieldsLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(SearchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(SearchButton)))
+                        .addGap(50, 50, 50)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(OptionalFieldsLabel)
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(MiddleInitialLabel)
                                     .addComponent(HeightLabel)
@@ -226,17 +264,23 @@ public class GUIAddRecord extends javax.swing.JFrame {
                                         .addComponent(DeceasedCheckBox)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(MaritalCheckBox)))))))
-                .addContainerGap())
+                .addContainerGap(47, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(TitleOfPageLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(TitleOfPageLabel)
-                .addGap(11, 11, 11)
+                .addGap(8, 8, 8)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(RequiredFieldsLabel)
-                    .addComponent(OptionalFieldsLabel))
+                    .addComponent(OptionalFieldsLabel)
+                    .addComponent(SearchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SearchButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(FirstNameLabel)
@@ -321,28 +365,75 @@ public class GUIAddRecord extends javax.swing.JFrame {
         
         if (data[0].equals("")) {
             // Handle having no first name
-            JOptionPane.showMessageDialog(new JFrame(), "Cannot add record with no first name.", "Error - No First Name Given", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(new JFrame(), "Cannot save record with no first name.", "Error - No First Name Given", JOptionPane.ERROR_MESSAGE);
         } else if (data[1].equals("")) {
             // Handle having no last name
-            JOptionPane.showMessageDialog(new JFrame(), "Cannot add record with no last name.", "Error - No Last Name Given", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(new JFrame(), "Cannot save record with no last name.", "Error - No Last Name Given", JOptionPane.ERROR_MESSAGE);
         } else if (data[2].equals("")) {
             // Handle having no age
-            JOptionPane.showMessageDialog(new JFrame(), "Cannot add record with no age.", "Error - No Age Given", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(new JFrame(), "Cannot save record with no age.", "Error - No Age Given", JOptionPane.ERROR_MESSAGE);
         } else {
-            Main.addRecordToDatabaseThroughGUI(data);
-            FirstNameTextField.setText("");
-            LastNameTextField.setText("");
-            AgeTextField.setText("");
-            MiddleInitialTextField.setText("");
-            HeightFeetTextField.setText("");
-            HeightInchesTextField.setText("");
-            WeightTextField.setText("");
-            DeceasedCheckBox.setSelected(false);
-            MaritalCheckBox.setSelected(false);
-            JOptionPane.showMessageDialog(new JFrame(), "Record added!", "Record Successfully Added", JOptionPane.PLAIN_MESSAGE);
+            Main.editRecordToDatabaseThroughGUI(new Record(data[0], data[1], (short) Integer.parseInt(data[2]),
+                    Integer.parseInt(SearchTextField.getText()), data[3].charAt(0), (short) Integer.parseInt(data[4]),
+                    (short) Integer.parseInt(data[5]), Integer.parseInt(data[6]), data[7].equals("DECEASED"),
+                    data[8].equals("MARRIED")), Integer.parseInt(SearchTextField.getText()) - 100);
+            JOptionPane.showMessageDialog(new JFrame(), "Record edited!", "Record Successfully Edited", JOptionPane.PLAIN_MESSAGE);
+            this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+            
         }
         
     }//GEN-LAST:event_SubmissionButtonActionPerformed
+
+    private void SearchTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SearchTextFieldActionPerformed
+
+    private void SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchButtonActionPerformed
+        try {
+            Record r = Main.searchByID(Integer.parseInt(SearchTextField.getText()));
+            if (r.getDeleted())
+                throw new Exception();
+            else {
+                AgeLabel.setVisible(true);
+                AgeTextField.setVisible(true);
+                DeceasedCheckBox.setVisible(true);
+                FirstNameLabel.setVisible(true);
+                FirstNameTextField.setVisible(true);
+                HeightFeetLabel.setVisible(true);
+                HeightFeetTextField.setVisible(true);
+                HeightInchesLabel.setVisible(true);
+                HeightInchesTextField.setVisible(true);
+                HeightLabel.setVisible(true);
+                LastNameLabel.setVisible(true);
+                LastNameTextField.setVisible(true);
+                MaritalCheckBox.setVisible(true);
+                MiddleInitialLabel.setVisible(true);
+                MiddleInitialTextField.setVisible(true);
+                OptionalFieldsLabel.setVisible(true);
+                RequiredFieldsLabel.setText("Required Fields:");
+                StatusLabel.setVisible(true);
+                SubmissionButton.setVisible(true);
+                WeightLabel.setVisible(true);
+                WeightPoundsLabel.setVisible(true);
+                WeightTextField.setVisible(true);
+                SearchTextField.setVisible(false);
+                SearchButton.setVisible(false);
+                
+                FirstNameTextField.setText(r.getFirstName());
+                LastNameTextField.setText(r.getLastName());
+                AgeTextField.setText(r.getAge()+"");
+                MiddleInitialTextField.setText(r.getMiddleInitial()+"");
+                HeightFeetTextField.setText(r.getHeightFeet()+"");
+                HeightInchesTextField.setText(r.getHeightInches()+"");
+                WeightTextField.setText(r.getWeight()+"");
+                DeceasedCheckBox.setSelected(r.getDeceased());
+                MaritalCheckBox.setSelected(r.getMarried());
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(new JFrame(), "Could not find Record #" + SearchTextField.getText() + ".", "Error - No Record Found", JOptionPane.ERROR_MESSAGE);
+            SearchTextField.setText("");
+        }
+    }//GEN-LAST:event_SearchButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -397,6 +488,8 @@ public class GUIAddRecord extends javax.swing.JFrame {
     private javax.swing.JTextField MiddleInitialTextField;
     private javax.swing.JLabel OptionalFieldsLabel;
     private javax.swing.JLabel RequiredFieldsLabel;
+    private javax.swing.JButton SearchButton;
+    private javax.swing.JTextField SearchTextField;
     private javax.swing.JLabel StatusLabel;
     private javax.swing.JButton SubmissionButton;
     private javax.swing.JLabel TitleOfPageLabel;

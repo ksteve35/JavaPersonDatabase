@@ -15,7 +15,7 @@ public class Main {
     public static void main(String[] args) {
         
         db = createTemplateDatabase();
-        System.out.println("Template Database created!");
+        //System.out.println("Template Database created!");
         
         new GUI();
         
@@ -33,6 +33,23 @@ public class Main {
                 temp[3].charAt(0), (short) Integer.parseInt(temp[4]), (short) Integer.parseInt(temp[5]),
                 Integer.parseInt(temp[6]), temp[7].equals("DECEASED"), temp[8].equals("MARRIED"));
         
+    }
+    
+    public static void editRecordToDatabaseThroughGUI(Record r, int i) {
+        
+        db.editRecord(r, i);
+        
+    }
+    
+    public static Record searchByID(int ID) {
+        for (int i = 0; i < db.getCounter(); i++) {
+            Record r = db.getRecord(i);
+            if (ID == r.getID())
+                return r;
+        }
+        Record notFound = new Record("NOT", "FOUND", (short) 0, 0);
+        notFound.setDeleted(true);
+        return notFound;
     }
     
     public static Database createTemplateDatabase() {
