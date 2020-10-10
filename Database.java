@@ -23,16 +23,21 @@ public class Database {
         records = new Record[size];
     }
     
+    public Record getRecord(int i) { return records[i]; }
     public int getCounter() { return counter; }
     public String getCategories() { return categories; }
     
     private String recordPrettyPrint(Record r, boolean b) {
         // boolean b says whether or not to print the categories header
         String retVal = (b ? categories : "");
-        retVal += String.format("%-7s", r.getID()) + String.format("%-16s", r.getFirstName())
-                + String.format("%-16s", r.getMiddleInitial()) + String.format("%-16s", r.getLastName())
-                + String.format("%-5s", r.getAge()) + String.format("%-10s", r.getHeightFeet() + "\'" + r.getHeightInches() + "\"")
-                + String.format("%-10s", r.getWeight() + " lbs") + String.format("%-10s", (r.getDeceased() ? "DECEASED" : "ALIVE"))
+        retVal += String.format("%-7s", r.getID())
+                + String.format("%-16s", r.getFirstName())
+                + String.format("%-16s", r.getMiddleInitial())
+                + String.format("%-16s", r.getLastName())
+                + String.format("%-5s", r.getAge())
+                + String.format("%-10s", (r.getHeightFeet() == 0 && r.getHeightInches() == 0 ? "N/A" : r.getHeightFeet() + "\'" + r.getHeightInches() + "\""))
+                + String.format("%-10s", (r.getWeight() == 0 ? "N/A" : r.getWeight() + " lbs"))
+                + String.format("%-10s", (r.getDeceased() ? "DECEASED" : "ALIVE"))
                 + String.format("%-10s", (r.getMarried() && !r.getDeceased() ? "MARRIED" : "SINGLE"));
         return retVal;
     }
@@ -52,6 +57,25 @@ public class Database {
         } else {
             System.out.println("Error: Database is empty! Cannot print null records.");
         }
+    }
+    
+    @Override
+    public String toString() {        
+        // If Database isn't empty, print out the records
+        String retVal = "";
+        if (counter > 0) {
+            retVal += recordPrettyPrint(records[0], true) + "\n";
+            for (int i = 1; i < records.length; i++) {
+                if (i < counter)
+                    retVal += recordPrettyPrint(records[i], false) + "\n";
+                else
+                    break;
+            }
+        } else {
+            retVal = "Error: Database is empty! Cannot print null records.";
+        }
+        
+        return retVal;
     }
     
     public void addRecord(String fn, String ln, short a, int i) {
@@ -77,46 +101,10 @@ public class Database {
             System.out.println("Error: Database is full! Cannot create new records.");
     }
     
-    public void editRecord(int i, int x, String s) {
-        // i controls what variable gets changed, x controls which record, s is the data
-        switch (i) {
-            case 0:
-                records[x].setID(Integer.parseInt(s));
-                break;
-            case 1:
-                records[x].setFirstName(s);
-                break;
-            case 2:
-                records[x].setMiddleInitial(s.charAt(0));
-                break;
-            case 3:
-                records[x].setLastName(s);
-                break;
-            case 4:
-                records[x].setAge(Short.valueOf(s));
-                break;
-            case 5:
-                records[x].setHeightFeet(Short.valueOf(s));
-                break;
-            case 6:
-                records[x].setHeightInches(Short.valueOf(s));
-                break;
-            case 7:
-                records[x].setWeight(Integer.parseInt(s));
-                break;
-            case 8:
-                if (s != null && s.trim().toUpperCase().equals("TRUE"))
-                    records[x].setDeceased(false);
-                else
-                    records[x].setDeceased(true);
-                break;
-            case 9:
-                if (s != null && s.trim().toUpperCase().equals("TRUE"))
-                    records[x].setMarried(true);
-                else
-                    records[x].setMarried(false);
-                break;
-        }
+    public void editRecord(Record r, int i) {
+        records[i] = new Record(new String(r.getFirstName()), new String(r.getLastName()),
+            r.getAge(), r.getID(), r.getMiddleInitial(), r.getHeightFeet(), r.getHeightInches(),
+            r.getWeight(), r.getDeceased(), r.getMarried());
     }
     
 }
