@@ -373,7 +373,7 @@ public class GUIEditRecord extends javax.swing.JFrame {
             // Handle having no age
             JOptionPane.showMessageDialog(new JFrame(), "Cannot save record with no age.", "Error - No Age Given", JOptionPane.ERROR_MESSAGE);
         } else {
-            Main.editRecordToDatabaseThroughGUI(new Record(data[0], data[1], (short) Integer.parseInt(data[2]),
+            Main.editRecordInDatabase(new Record(data[0], data[1], (short) Integer.parseInt(data[2]),
                     Integer.parseInt(SearchTextField.getText()), data[3].charAt(0), (short) Integer.parseInt(data[4]),
                     (short) Integer.parseInt(data[5]), Integer.parseInt(data[6]), data[7].equals("DECEASED"),
                     data[8].equals("MARRIED")), Integer.parseInt(SearchTextField.getText()) - 100);

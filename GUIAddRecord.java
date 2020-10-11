@@ -329,7 +329,7 @@ public class GUIAddRecord extends javax.swing.JFrame {
             // Handle having no age
             JOptionPane.showMessageDialog(new JFrame(), "Cannot add record with no age.", "Error - No Age Given", JOptionPane.ERROR_MESSAGE);
         } else {
-            Main.addRecordToDatabaseThroughGUI(data);
+            Main.addRecordToDatabase(data);
             FirstNameTextField.setText("");
             LastNameTextField.setText("");
             AgeTextField.setText("");
