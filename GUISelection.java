@@ -1,6 +1,7 @@
 
 import java.awt.Font;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 
@@ -82,6 +83,11 @@ public class GUISelection extends javax.swing.JFrame {
         });
 
         DeleteRecordButton.setText("Delete a Record");
+        DeleteRecordButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteRecordButtonActionPerformed(evt);
+            }
+        });
 
         VariableComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "First Name", "Last Name" }));
         VariableComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -227,11 +233,20 @@ public class GUISelection extends javax.swing.JFrame {
 
     private void SaveDatabaseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveDatabaseButtonActionPerformed
         Main.saveDatabaseToJSON();
+        JOptionPane.showMessageDialog(new JFrame(), "Database saved!", "Database Successfully Saved", JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_SaveDatabaseButtonActionPerformed
 
     private void LoadDatabaseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoadDatabaseButtonActionPerformed
-        // TODO add your handling code here:
+        Main.loadDatabaseFromJSON();
+        JOptionPane.showMessageDialog(new JFrame(), "Database loaded!", "Database Successfully Loaded", JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_LoadDatabaseButtonActionPerformed
+
+    private void DeleteRecordButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteRecordButtonActionPerformed
+        GUIDeleteRecord gdr = new GUIDeleteRecord();
+        gdr.setTitle("Deleting a Record");
+        gdr.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        gdr.setVisible(true);
+    }//GEN-LAST:event_DeleteRecordButtonActionPerformed
 
     /**
      * @param args the command line arguments

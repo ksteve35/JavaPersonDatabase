@@ -77,6 +77,7 @@ public class Main {
         
         GUISelection gs = new GUISelection();
         gs.setTitle("Java Database");
+        gs.setResizable(false);
         gs.setVisible(true);
     }
     
@@ -175,6 +176,10 @@ public class Main {
     
     public static void editRecordInDatabase(Record r, int i) {
         db.editRecord(r, i);
+    }
+    
+    public static void deleteRecordInDatabase(int i) {
+        db.deleteRecord(i);
     }
     
     public static Record searchByID(int ID) {
