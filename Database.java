@@ -5,9 +5,11 @@ database for the database records.
 
 */
 
+import java.util.ArrayList;
+
 public class Database {
     
-    private Record[] records;
+    private ArrayList<Record> records;
     private final String categories = String.format("%-7s", "ID") + String.format("%-16s", "FIRST NAME")
             + String.format("%-16s", "MIDDLE INITIAL") + String.format("%-16s", "LAST NAME")
             + String.format("%-5s", "AGE") + String.format("%-10s", "HEIGHT") + String.format("%-10s", "WEIGHT")
@@ -16,14 +18,10 @@ public class Database {
     private int counter = 0;
     
     public Database() {
-        records = new Record[20];
+        records = new ArrayList<Record>();
     }
     
-    public Database(int size) {
-        records = new Record[size];
-    }
-    
-    public Record getRecord(int i) { return records[i]; }
+    public Record getRecord(int i) { return records.get(i); }
     public int getCounter() { return counter; }
     public String getCategories() { return categories; }
     
@@ -46,10 +44,10 @@ public class Database {
         // If Database isn't empty, print out the records
         if (counter > 0) {
             String retVal = "";
-            retVal += recordPrettyPrint(records[0], true) + "\n";
-            for (int i = 1; i < records.length; i++) {
+            retVal += recordPrettyPrint(records.get(0), true) + "\n";
+            for (int i = 1; i < records.size(); i++) {
                 if (i < counter)
-                    retVal += recordPrettyPrint(records[i], false) + "\n";
+                    retVal += recordPrettyPrint(records.get(i), false) + "\n";
                 else
                     break;
             }
@@ -64,10 +62,10 @@ public class Database {
         // If Database isn't empty, print out the records
         String retVal = "";
         if (counter > 0) {
-            retVal += recordPrettyPrint(records[0], true) + "\n";
-            for (int i = 1; i < records.length; i++) {
+            retVal += recordPrettyPrint(records.get(0), true) + "\n";
+            for (int i = 1; i < records.size(); i++) {
                 if (i < counter)
-                    retVal += recordPrettyPrint(records[i], false) + "\n";
+                    retVal += recordPrettyPrint(records.get(i), false) + "\n";
                 else
                     break;
             }
@@ -79,32 +77,24 @@ public class Database {
     }
     
     public void addRecord(String fn, String ln, short a, int i) {
-        if (counter < records.length)
-            records[counter++] = new Record(fn, ln, a, i);
-        else
-            System.out.println("Error: Database is full! Cannot create new records.");
+        records.add(new Record(fn, ln, a, i));
+        counter++;
     }
     
     public void addRecord(String fn, String ln, short a, int i, char m, short hF, short hI, int w, boolean d, boolean ma) {
-        if (counter < records.length)
-            records[counter++] = new Record(fn, ln, a, i, m, hF, hI, w, d, ma);
-        else
-            System.out.println("Error: Database is full! Cannot create new records.");
+        records.add(new Record(fn, ln, a, i, m, hF, hI, w, d, ma));
+        counter++;
     }
     
-    public void addRecord(Record r) {
-        if (counter < records.length)
-            records[counter++] = new Record(new String(r.getFirstName()), new String(r.getLastName()),
-                    r.getAge(), r.getID(), r.getMiddleInitial(), r.getHeightFeet(), r.getHeightInches(),
-                    r.getWeight(), r.getDeceased(), r.getMarried());
-        else
-            System.out.println("Error: Database is full! Cannot create new records.");
+    public void addRecordForTemplate(Record r) {
+        records.add(new Record(new String(r.getFirstName()), new String(r.getLastName()),
+            r.getAge(), r.getID(), r.getMiddleInitial(), r.getHeightFeet(), r.getHeightInches(),
+            r.getWeight(), r.getDeceased(), r.getMarried()));
+        counter++;
     }
     
     public void editRecord(Record r, int i) {
-        records[i] = new Record(new String(r.getFirstName()), new String(r.getLastName()),
-            r.getAge(), r.getID(), r.getMiddleInitial(), r.getHeightFeet(), r.getHeightInches(),
-            r.getWeight(), r.getDeceased(), r.getMarried());
+        records.set(i, r);
     }
     
 }

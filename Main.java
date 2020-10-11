@@ -60,7 +60,7 @@ public class Main {
         switch (selection) {
             case 0:
                 // Creates new Database with 1000 slots
-                db = new Database(1000);
+                db = new Database();
                 break;
             case 1:
                 // Loads Database from a JSON file
@@ -195,13 +195,13 @@ public class Main {
         // database.
         Database database = new Database();
         
-        database.addRecord(new Record("KYLE",       "STEVENSON",    (short) 23,     100 + database.getCounter(),    'W',    (short) 5,  (short) 9,  172, false, false));
-        database.addRecord(new Record("ANDREW",     "MERVYN",       (short) 23,     100 + database.getCounter(),    'D',    (short) 5,  (short) 3,  143, false, false));
-        database.addRecord(new Record("NICOLAS",    "MYNARCIK",     (short) 23,     100 + database.getCounter(),    'A',    (short) 5,  (short) 8,  191, false, false));
-        database.addRecord(new Record("ADRIAN",     "WATT",         (short) 29,     100 + database.getCounter(),    'A',    (short) 6,  (short) 3,  183, false, false));
-        database.addRecord(new Record("AMY",        "METZGAR",      (short) 27,     100 + database.getCounter(),    'P',    (short) 5,  (short) 4,  146, false, false));
-        database.addRecord(new Record("SON",        "GOKU",         (short) 47,     100 + database.getCounter(),    'R',    (short) 6,  (short) 1,  213, false, true));
-        database.addRecord(new Record("STAN",       "LEE",          (short) 95,     100 + database.getCounter(),    'M',    (short) 5,  (short) 6,  128, true, false));
+        database.addRecordForTemplate(new Record("KYLE",       "STEVENSON",    (short) 23,     100 + database.getCounter(),    'W',    (short) 5,  (short) 9,  172, false, false));
+        database.addRecordForTemplate(new Record("ANDREW",     "MERVYN",       (short) 23,     100 + database.getCounter(),    'D',    (short) 5,  (short) 3,  143, false, false));
+        database.addRecordForTemplate(new Record("NICOLAS",    "MYNARCIK",     (short) 23,     100 + database.getCounter(),    'A',    (short) 5,  (short) 8,  191, false, false));
+        database.addRecordForTemplate(new Record("ADRIAN",     "WATT",         (short) 29,     100 + database.getCounter(),    'A',    (short) 6,  (short) 3,  183, false, false));
+        database.addRecordForTemplate(new Record("AMY",        "METZGAR",      (short) 27,     100 + database.getCounter(),    'P',    (short) 5,  (short) 4,  146, false, false));
+        database.addRecordForTemplate(new Record("SON",        "GOKU",         (short) 47,     100 + database.getCounter(),    'R',    (short) 6,  (short) 1,  213, false, true));
+        database.addRecordForTemplate(new Record("STAN",       "LEE",          (short) 95,     100 + database.getCounter(),    'M',    (short) 5,  (short) 6,  128, true, false));
         
         return database;
     }
