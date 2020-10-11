@@ -20,7 +20,7 @@ import javax.swing.SwingConstants;
 import javax.swing.UnsupportedLookAndFeelException;
 
 
-public class GUI implements ActionListener {
+public class GUIOld implements ActionListener {
     
     private JFrame frame;
     private JPanel containingPanel, buttonPanel;
@@ -31,7 +31,7 @@ public class GUI implements ActionListener {
                                             "Print by First Name Ascending", "Print by First Name Descending",
                                             "Print by Last Name Ascending", "Print by Last Name Descending"};
     
-    public GUI() {
+    public GUIOld() {
         frame = new JFrame();
         containingPanel = new JPanel();
         buttonPanel = new JPanel();
@@ -55,17 +55,17 @@ public class GUI implements ActionListener {
         containingPanel.add(buttonPanel, BorderLayout.CENTER);
         frame.add(containingPanel);
         
-        try {
+        /*try {
             javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GUIOld.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GUIOld.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GUIOld.class.getName()).log(Level.SEVERE, null, ex);
         } catch (UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            Logger.getLogger(GUIOld.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
         
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("Java Database");

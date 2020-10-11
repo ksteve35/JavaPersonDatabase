@@ -13,12 +13,12 @@ import javax.swing.JOptionPane;
  *
  * @author Kyle
  */
-public class GUIEditRecord extends javax.swing.JFrame {
+public class GUIDeleteRecord extends javax.swing.JFrame {
 
     /**
      * Creates new form GUIAddRecord
      */
-    public GUIEditRecord() {
+    public GUIDeleteRecord() {
         initComponents();
         AgeLabel.setVisible(false);
         AgeTextField.setVisible(false);
@@ -36,9 +36,9 @@ public class GUIEditRecord extends javax.swing.JFrame {
         MiddleInitialLabel.setVisible(false);
         MiddleInitialTextField.setVisible(false);
         OptionalFieldsLabel.setVisible(false);
-        RequiredFieldsLabel.setText("ID # of Record to Edit:");
+        RequiredFieldsLabel.setText("ID # of Record to Delete:");
         StatusLabel.setVisible(false);
-        SubmissionButton.setVisible(false);
+        DeletionButton.setVisible(false);
         WeightLabel.setVisible(false);
         WeightPoundsLabel.setVisible(false);
         WeightTextField.setVisible(false);
@@ -70,7 +70,7 @@ public class GUIEditRecord extends javax.swing.JFrame {
         WeightTextField = new javax.swing.JTextField();
         DeceasedCheckBox = new javax.swing.JCheckBox();
         MaritalCheckBox = new javax.swing.JCheckBox();
-        SubmissionButton = new javax.swing.JButton();
+        DeletionButton = new javax.swing.JButton();
         RequiredFieldsLabel = new javax.swing.JLabel();
         OptionalFieldsLabel = new javax.swing.JLabel();
         HeightFeetLabel = new javax.swing.JLabel();
@@ -97,7 +97,7 @@ public class GUIEditRecord extends javax.swing.JFrame {
         FirstNameLabel.setText("First Name:");
 
         TitleOfPageLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        TitleOfPageLabel.setText("Editing Record");
+        TitleOfPageLabel.setText("Deleting Record");
         TitleOfPageLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         FirstNameTextField.setColumns(25);
@@ -173,10 +173,10 @@ public class GUIEditRecord extends javax.swing.JFrame {
             }
         });
 
-        SubmissionButton.setText("Submit Edited Record");
-        SubmissionButton.addActionListener(new java.awt.event.ActionListener() {
+        DeletionButton.setText("Delete Record");
+        DeletionButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SubmissionButtonActionPerformed(evt);
+                DeletionButtonActionPerformed(evt);
             }
         });
 
@@ -215,7 +215,7 @@ public class GUIEditRecord extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(SubmissionButton)
+                    .addComponent(DeletionButton)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -309,7 +309,7 @@ public class GUIEditRecord extends javax.swing.JFrame {
                     .addComponent(MaritalCheckBox)
                     .addComponent(StatusLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(SubmissionButton)
+                .addComponent(DeletionButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -352,37 +352,12 @@ public class GUIEditRecord extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_MaritalCheckBoxActionPerformed
 
-    private void SubmissionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmissionButtonActionPerformed
-        String[] data = {FirstNameTextField.getText(),
-                        LastNameTextField.getText(),
-                        AgeTextField.getText(),
-                        (MiddleInitialTextField.getText().equals("") ? "-" : MiddleInitialTextField.getText()),
-                        (HeightFeetTextField.getText().equals("") ? "0" : HeightFeetTextField.getText()),
-                        (HeightInchesTextField.getText().equals("") ? "0" : HeightInchesTextField.getText()),
-                        (WeightTextField.getText().equals("") ? "0" : WeightTextField.getText()),
-                        (DeceasedCheckBox.isSelected() ? "DECEASED" : "ALIVE"),
-                        (MaritalCheckBox.isSelected() ? "MARRIED" : "SINGLE")};
+    private void DeletionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeletionButtonActionPerformed
+        Main.deleteRecordInDatabase(Integer.parseInt(SearchTextField.getText()) - 100);
+        JOptionPane.showMessageDialog(new JFrame(), "Record deleted!", "Record Successfully Deleted", JOptionPane.PLAIN_MESSAGE);
+        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
         
-        if (data[0].equals("")) {
-            // Handle having no first name
-            JOptionPane.showMessageDialog(new JFrame(), "Cannot save record with no first name.", "Error - No First Name Given", JOptionPane.ERROR_MESSAGE);
-        } else if (data[1].equals("")) {
-            // Handle having no last name
-            JOptionPane.showMessageDialog(new JFrame(), "Cannot save record with no last name.", "Error - No Last Name Given", JOptionPane.ERROR_MESSAGE);
-        } else if (data[2].equals("")) {
-            // Handle having no age
-            JOptionPane.showMessageDialog(new JFrame(), "Cannot save record with no age.", "Error - No Age Given", JOptionPane.ERROR_MESSAGE);
-        } else {
-            Main.editRecordInDatabase(new Record(data[0], data[1], (short) Integer.parseInt(data[2]),
-                    Integer.parseInt(SearchTextField.getText()), data[3].charAt(0), (short) Integer.parseInt(data[4]),
-                    (short) Integer.parseInt(data[5]), Integer.parseInt(data[6]), data[7].equals("DECEASED"),
-                    data[8].equals("MARRIED")), Integer.parseInt(SearchTextField.getText()) - 100);
-            JOptionPane.showMessageDialog(new JFrame(), "Record edited!", "Record Successfully Edited", JOptionPane.PLAIN_MESSAGE);
-            this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
-            
-        }
-        
-    }//GEN-LAST:event_SubmissionButtonActionPerformed
+    }//GEN-LAST:event_DeletionButtonActionPerformed
 
     private void SearchTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchTextFieldActionPerformed
         // TODO add your handling code here:
@@ -409,10 +384,9 @@ public class GUIEditRecord extends javax.swing.JFrame {
                 MaritalCheckBox.setVisible(true);
                 MiddleInitialLabel.setVisible(true);
                 MiddleInitialTextField.setVisible(true);
-                OptionalFieldsLabel.setVisible(true);
-                RequiredFieldsLabel.setText("Required Fields:");
+                RequiredFieldsLabel.setVisible(false);
                 StatusLabel.setVisible(true);
-                SubmissionButton.setVisible(true);
+                DeletionButton.setVisible(true);
                 WeightLabel.setVisible(true);
                 WeightPoundsLabel.setVisible(true);
                 WeightTextField.setVisible(true);
@@ -474,6 +448,7 @@ public class GUIEditRecord extends javax.swing.JFrame {
     private javax.swing.JLabel AgeLabel;
     private javax.swing.JTextField AgeTextField;
     private javax.swing.JCheckBox DeceasedCheckBox;
+    private javax.swing.JButton DeletionButton;
     private javax.swing.JLabel FirstNameLabel;
     private javax.swing.JTextField FirstNameTextField;
     private javax.swing.JLabel HeightFeetLabel;
@@ -491,7 +466,6 @@ public class GUIEditRecord extends javax.swing.JFrame {
     private javax.swing.JButton SearchButton;
     private javax.swing.JTextField SearchTextField;
     private javax.swing.JLabel StatusLabel;
-    private javax.swing.JButton SubmissionButton;
     private javax.swing.JLabel TitleOfPageLabel;
     private javax.swing.JLabel WeightLabel;
     private javax.swing.JLabel WeightPoundsLabel;
