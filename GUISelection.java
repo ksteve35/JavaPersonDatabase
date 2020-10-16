@@ -3,6 +3,7 @@ import java.awt.Font;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 
 /*
@@ -218,15 +219,18 @@ public class GUISelection extends javax.swing.JFrame {
         JFrame data = new JFrame();
         JPanel resultsPanel = new JPanel();
         JTextPane results = new JTextPane();
+        JScrollPane jsp;
         Font font = new Font(Font.MONOSPACED, Font.PLAIN, 15);
         String vcb = VariableComboBox.getSelectedItem().toString();
         String scb = SortingComboBox.getSelectedItem().toString();
         results.setFont(font);
         results.setText(Main.databaseToString());
         resultsPanel.add(results);
-        data.add(resultsPanel);
+        jsp = new JScrollPane(resultsPanel);
+        jsp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        data.add(jsp);
         data.setTitle(vcb + " " + scb);
-        data.setSize(920, 500);
+        data.setSize(944, 500);
         data.setResizable(false);
         data.setVisible(true);
     }//GEN-LAST:event_PrintDatabaseButtonActionPerformed
